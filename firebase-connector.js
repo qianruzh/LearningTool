@@ -27,3 +27,22 @@ firebase.database().ref('deck/flashcards');
  
 // Remove myFlashcards from the database
 firebase.database.remove()
+
+// As before,make the database point to the location where the data exists
+// If the location doesn't exist it will be created but there will be nothing to retirieve
+let fc = firebase.database().ref('deck/flashy');
+
+// A variable to store the JSON results in a human readable format
+let jsonString;
+// Tell Firebase to retrieve your data
+fc.on("value", function(retrieve) {
+
+    //Get the raw JSON data back from the database
+    let queryData = retrieve.val();
+
+    // Turn the data into a JSON String
+    jsonString = JSON.stringify(queryData);
+});
+
+// Print the data out as a JSON string or otherwise manipulate it
+console.log (' JSON string:' + jsonString )
