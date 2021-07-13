@@ -17,32 +17,24 @@ firebase.analytics();
 firebase.database().ref();  // Specifies the database root
 firebase.database().ref("child/path") // Specifies a specific location in the database tree
 
+let myFlashcards = [ {
+    "question": "Name this species of bird.",
+    "image" : "images/barn-owl-2550068__340.webp",
+    "answer": "Barn Owl"
+    },
+    {
+    "question": "Name this species of bird.",
+    "image" : "images/dove-2516641__340.webp",
+    "answer": "Dove"
+    },
+    {
+    "question": "Name this species of bird.",
+    "image" : "images/hummingbird-2139279__340.webp",
+    "answer": "Hummingbird"
+    }
+  ];
+
 let dbLocation = firbase.database().ref('deck/flashcards');
 
 dbLocation.set(myFlashcards);
 
-// Make the database point to the location root -> deck -> flashcards
-// If the location doesn't exist is will be created
-firebase.database().ref('deck/flashcards'); 
- 
-// Remove myFlashcards from the database
-firebase.database.remove()
-
-// As before,make the database point to the location where the data exists
-// If the location doesn't exist it will be created but there will be nothing to retirieve
-let fc = firebase.database().ref('deck/flashy');
-
-// A variable to store the JSON results in a human readable format
-let jsonString;
-// Tell Firebase to retrieve your data
-fc.on("value", function(retrieve) {
-
-    //Get the raw JSON data back from the database
-    let queryData = retrieve.val();
-
-    // Turn the data into a JSON String
-    jsonString = JSON.stringify(queryData);
-});
-
-// Print the data out as a JSON string or otherwise manipulate it
-console.log (' JSON string:' + jsonString )
